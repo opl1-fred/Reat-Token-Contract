@@ -14,9 +14,9 @@ contract REAT is Initializable, ERC20Upgradeable, OwnableUpgradeable, ERC20Permi
         _disableInitializers();
     }
 
-    function initialize(address owner) initializer public {
+    function initialize(address initialOwner) initializer public {
         __ERC20_init("REAT", "REAT");
-        __Ownable_init(owner);
+        __Ownable_init(initialOwner);
         __ERC20Permit_init("REAT");
         __UUPSUpgradeable_init();
 
