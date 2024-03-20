@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Compatible with OpenZeppelin Contracts ^5.0.0
-pragma solidity ^0.8.24;
+
+pragma solidity 0.8.24;
 
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
@@ -17,6 +18,10 @@ contract REAT is Initializable, ERC20Upgradeable, OwnableUpgradeable, ERC20Permi
         _disableInitializers();
     }
 
+    /**
+     * @dev Initializes the contract.
+     * @param initialOwner The address that will have ownership upon deployment.
+     */
     function initialize(address initialOwner) initializer public {
         __ERC20_init("REAT", "REAT");
         __Ownable_init(initialOwner);
@@ -26,13 +31,18 @@ contract REAT is Initializable, ERC20Upgradeable, OwnableUpgradeable, ERC20Permi
         _mint(msg.sender, 50_000_000 * 10 ** decimals());
     }
 
+    /**
+     * @dev Mints tokens and assigns them to the specified address.
+     * @param to The address to which the minted tokens will be assigned.
+     * @param amount The amount of tokens to be minted.
+     */
     function mint(address to, uint256 amount) public onlyOwner {
         _mint(to, amount);
     }
 
-    function _authorizeUpgrade(address newImplementation)
-        internal
-        onlyOwner
-        override
-    {}
+    /**
+     * @dev Overrides the function to authorize an upgrade.
+     * @param newImplementation The address of the new implementation contract.
+     */
+    function _authorizeUpgrade(address newImplementation) internal onlyOwner override {}
 }
