@@ -14,6 +14,10 @@ module.exports = {
     sepolia: {
       chainId: 11155111,
       url: "https://rpc.ankr.com/eth_sepolia",
+    },
+    mainnet: {
+      chainId: 1,
+      url: "https://rpc.ankr.com/eth",
     }
   }
 };
